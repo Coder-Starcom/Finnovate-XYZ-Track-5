@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Checkout Eye Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Consent Modal -->
+    <div id="consentModal">
+      <div class="modalContent">
+        <h2>Privacy & Consent</h2>
+        <p>
+          We use your webcam locally in this browser to track eye movement. No
+          data leaves your device.
+        </p>
+        <button id="acceptConsent">I Consent</button>
+      </div>
+    </div>
+
+    <!-- Eye icon + help box -->
+    <div id="cameraContainer">
+      <span id="cameraStatus" title="Camera inactive">&#128065;</span>
+      <div id="cameraHelp" class="hidden">
+        <p>Click the eye icon to toggle the camera.</p>
+      </div>
+    </div>
+
+    <!-- Calibration Overlay -->
+    <div id="calibration">
+      <h2>Eye Tracker Calibration</h2>
+      <p>Click each dot while looking at it</p>
+      <div class="dot tl"></div>
+      <div class="dot tc"></div>
+      <div class="dot tr"></div>
+      <div class="dot ml"></div>
+      <div class="dot center"></div>
+      <div class="dot mr"></div>
+      <div class="dot bl"></div>
+      <div class="dot bc"></div>
+      <div class="dot br"></div>
+    </div>
+
+    <!-- Checkout Page -->
+    <div id="checkout" class="hidden">
+      <header>
+        <h1>Checkout</h1>
+        <p class="subtitle">
+          Please review your order and select options below
+        </p>
+      </header>
+
+      <section id="price" class="zone card">
+        <h2>Order Summary</h2>
+        <ul class="collapsed">
+          <li>Product: Wireless Headphones - ₹999</li>
+          <li>Platform Fee: ₹49</li>
+          <li>Handling: ₹32</li>
+          <li>GST (18%): ₹196</li>
+        </ul>
+        <p class="total">Total: ₹1276*</p>
+        <button class="large-btn">View Details</button>
+        <div class="tooltip hidden">
+          Double-check product, fees, taxes, and promotions.
+        </div>
+      </section>
+
+      <section id="coupon" class="zone card">
+        <h2>Coupons & Offers</h2>
+        <input type="text" placeholder="Enter promo code" />
+        <button class="large-btn">Apply Coupon</button>
+        <div class="tooltip hidden">
+          Try available coupons: WELCOME10, FESTIVE50.
+        </div>
+      </section>
+
+      <section id="delivery" class="zone card">
+        <h2>Delivery Options</h2>
+        <label
+          ><input type="radio" name="delivery" /> Standard (Free, 5–7
+          days)</label
+        >
+        <label
+          ><input type="radio" name="delivery" /> Express (₹99, 1–2 days)</label
+        >
+        <button class="large-btn">Select Delivery</button>
+        <div class="tooltip hidden">
+          Select delivery type; charges may affect total.
+        </div>
+      </section>
+
+      <section id="payment" class="zone card">
+        <h2>Payment Method</h2>
+        <label><input type="radio" name="pay" /> Credit / Debit Card</label>
+        <label><input type="radio" name="pay" /> UPI / Wallet</label>
+        <label><input type="radio" name="pay" /> Net Banking</label>
+        <button class="large-btn">Choose Payment</button>
+        <div class="tooltip hidden">Select your preferred payment method.</div>
+      </section>
+
+      <section id="terms" class="zone card">
+        <label
+          ><input type="checkbox" /> I agree to the <u>Terms of Service</u> and
+          <u>Refund Policy</u></label
+        >
+        <button class="large-btn">Accept Terms</button>
+        <div class="tooltip hidden">
+          Confirm you accept the terms before proceeding.
+        </div>
+      </section>
+
+      <!-- Chatbot / AI assistant (hidden until escalation) -->
+      <div id="chatbot" class="hidden">
+        <p>Confusion detected. Do you want to chat with our support team?</p>
+        <button class="large-btn">Start Chat</button>
+      </div>
+
+      <button id="payNow" class="large-btn pay-btn">Pay ₹1276</button>
+    </div>
+
+    <!-- Phase 5 heatmap charts -->
+    <canvas id="heatmapChartDwell" width="600" height="400"></canvas>
+    <canvas id="heatmapChartRevisits" width="600" height="400"></canvas>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://webgazer.cs.brown.edu/webgazer.js"></script>
+
+    <script src="phase4_privacy.js"></script>
+    <script src="zones.js"></script>
+    <script src="phase1_calibration.js"></script>
+    <script src="phase2_tracking.js"></script>
+    <script src="phase3_ui_feedback.js"></script>
+    <script src="phase5_heatmap.js"></script>
+  </body>
+</html>
