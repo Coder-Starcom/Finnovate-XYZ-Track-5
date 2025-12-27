@@ -3,7 +3,7 @@
 // ===============================
 
 const ESCALATION_TIME = 15000; // 15 seconds
-let escalationTimer = null;
+let uiEscalationTimer = null;
 
 // -------------------------------
 // Form validation
@@ -43,8 +43,8 @@ window.addEventListener("confusionDetected", (e) => {
   if (collapsed) collapsed.classList.remove("collapsed");
 
   // Start escalation timer (once per session)
-  if (!escalationTimer) {
-    escalationTimer = setTimeout(() => {
+  if (!uiEscalationTimer) {
+    uiEscalationTimer = setTimeout(() => {
       console.warn("Phase 3: Human escalation triggered");
       document.getElementById("chatbot")?.classList.remove("hidden");
     }, ESCALATION_TIME);

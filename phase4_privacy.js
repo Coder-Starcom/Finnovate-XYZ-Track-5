@@ -6,7 +6,7 @@ const cameraContainer = document.getElementById("cameraContainer");
 
 let cameraActive = false;
 let webgazerStarted = false;
-let escalationTimer = null;
+let privacyEscalationTimer = null;
 
 // -------------------------------
 // Privacy text next to camera
