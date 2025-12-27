@@ -2,8 +2,8 @@
 // Phase 2: Gaze Tracking & Metrics
 // ===============================
 
-const DWELL_THRESHOLD = 5000; // 5 seconds
 const REVISIT_THRESHOLD = 3;
+const TOTAL_DWELL_THRESHOLD = 5000; // 15s in ms
 
 let trackingActive = false;
 
@@ -18,77 +18,45 @@ window.addEventListener("calibrationComplete", () => {
 
     const x = data.x;
     const y = data.y;
-
     const activeZone = detectZone(x, y);
-    const saccade = calcSaccadeDistance(x, y); // stored if needed later
+    calcSaccadeDistance(x, y); // optional, for analytics
 
     zones.forEach((z) => {
-      // -------------------------------
-      // Gaze INSIDE zone
-      // -------------------------------
       if (activeZone === z) {
         if (!z.lastInside) {
           z.lastInside = true;
           z.revisitCount++;
-          z.entryTime = timestamp;
           z.lastTimestamp = timestamp;
-
           console.log(
             `Gaze entered zone: ${z.id} (revisits: ${z.revisitCount})`
           );
         }
 
-        // Compute delta time
-        const delta = timestamp - z.lastTimestamp;
+        const delta = timestamp - (z.lastTimestamp || timestamp);
         z.lastTimestamp = timestamp;
 
-        // Accumulate dwell
-        z.dwell += delta; // continuous dwell
-        z.totalDwell += delta; // total session dwell
+        z.dwell += delta;
+        z.totalDwell += delta;
 
-        // Accumulate before/after tooltip dwell
-        if (!z.tooltipShown) {
-          z.dwellBeforeHelp += delta;
-        } else {
-          z.dwellAfterHelp += delta;
-        }
+        if (!z.tooltipShown) z.dwellBeforeHelp += delta;
+        else z.dwellAfterHelp += delta;
 
-        console.log(
-          `Dwell ${z.id}: total=${Math.round(z.totalDwell)}ms ` +
-            `before=${Math.round(z.dwellBeforeHelp)}ms ` +
-            `after=${Math.round(z.dwellAfterHelp)}ms`
-        );
-
-        // Confusion hotspot detection
+        // Threshold reached → show tooltip in Phase 3
         if (
-          z.dwell >= DWELL_THRESHOLD &&
           z.revisitCount >= REVISIT_THRESHOLD &&
-          !z.confusion
+          z.totalDwell >= TOTAL_DWELL_THRESHOLD &&
+          !z.tooltipShown
         ) {
-          z.confusion = true;
-          console.warn(`Confusion hotspot detected: ${z.id}`);
-
           window.dispatchEvent(
-            new CustomEvent("confusionDetected", {
-              detail: {
-                zoneId: z.id,
-                dwell: z.dwell,
-                revisits: z.revisitCount,
-              },
+            new CustomEvent("zoneThresholdReached", {
+              detail: { zoneId: z.id },
             })
           );
         }
-      }
-
-      // -------------------------------
-      // Gaze LEFT zone
-      // -------------------------------
-      else if (z.lastInside) {
+      } else if (z.lastInside) {
         z.lastInside = false;
-        z.entryTime = null;
         z.lastTimestamp = null;
-        z.dwell = 0; // reset continuous dwell only
-
+        z.dwell = 0;
         console.log(`Gaze left zone: ${z.id}`);
       }
     });

@@ -70,7 +70,7 @@ body {
 
 /* Checkout */
 #checkout {
-  max-width: 500px;
+  /* max-width: 500px; */
   margin: 20px auto;
   padding: 20px;
 }
@@ -228,13 +228,209 @@ header h1 {
   border: 1px solid #ccc;
   padding: 6px;
   border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   font-size: 10px;
 }
 
 /* Heatmap charts sizing */
-#heatmapChartDwell, #heatmapChartRevisits {
+#heatmapChartDwell,
+#heatmapChartRevisits {
   display: block;
   max-width: 600px;
   margin: 20px auto;
+}
+
+/*-----/*/
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  /* Lighter, softer gradient to make the glass pop */
+  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #444;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Calibration overlay - Frosted glass */
+#calibration {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 1000;
+}
+
+/* Dots: Glow effect instead of solid colors */
+.dot {
+  width: 25px;
+  height: 25px;
+  background: rgba(255, 59, 48, 0.8);
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 59, 48, 0.4);
+  transition: transform 0.2s ease;
+}
+.dot:active {
+  transform: scale(0.9);
+}
+.dot.done {
+  background: rgba(52, 199, 89, 0.8);
+  box-shadow: 0 0 15px rgba(52, 199, 89, 0.4);
+}
+
+/* Main Container */
+#checkout {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+header h1 {
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Light Glass Cards */
+.card {
+  background: rgba(255, 255, 255, 0.4); /* Very transparent */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  /* The "Light Edge": bright white semi-transparent border */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* Buttons: Soft & Modern */
+.large-btn {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  background: rgba(47, 128, 237, 0.9);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(47, 128, 237, 0.2);
+}
+
+.large-btn:hover {
+  background: #2f80ed;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(47, 128, 237, 0.3);
+}
+
+.pay-btn {
+  background: #27ae60;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+/* Chatbot: Pale Yellow Glass */
+#chatbot {
+  background: rgba(255, 249, 196, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+/* Consent Modal */
+.modalContent {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(25px);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating AI Assistant (Bottom Right) */
+#aiAssistant {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+span {
+  width: 5%;
+}
+
+/* Container adjustment to ensure it stays top-right */
+#cameraContainer {
+  position: fixed;
+  top: 5%;
+  right: 5%; /* Occupy 25% of the viewport width */
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 3000; /* Allows clicking things underneath if needed */
+}
+
+.privacy-glass-box {
+  /* Positioning */
+  position: fixed;
+  top: 2px; /* Distance from top */
+  right: 2px; /* Distance from right */
+  width: 70vw; /* Exactly 25% of the viewport width */
+  z-index: 5000; /* Stay above everything else */
+
+  /* Glassmorphism Aesthetics */
+  background: rgba(255, 255, 255, 0.3); /* Ultra-light transparency */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Crisp light edge */
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+
+  /* Text Styling */
+  font-size: 11px;
+  line-height: 1.5;
+  color: #444;
+  text-align: center;
+
+  /* Safety for Mobile */
+  min-width: 200px; /* Prevents it from becoming a tiny sliver on phones */
+}
+
+/* Optional: Subtle entrance animation */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.privacy-glass-box {
+  animation: fadeInRight 0.8s ease-out;
 }
