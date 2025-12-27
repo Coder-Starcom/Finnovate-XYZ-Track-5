@@ -1,5 +1,8 @@
 # 🛒 Checkout Eye-Tracking Project (Track 5)
 
+Live Demo: [Eye-Tracking Project](https://finnovate-xyz-track-5.netlify.app)
+Team (XYZ)
+
 ## 📑 Table of Contents
 
 1. [Overview](#overview)
