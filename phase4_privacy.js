@@ -15,7 +15,7 @@ let webgazerStarted = false;
 const privacyText = document.createElement("span");
 privacyText.className = "glass-privacy-note"; // Use a class for styling
 privacyText.innerText =
-  "\nWe use your camera to detect where you are looking and to provide help. No images are stored. You can disable this any time.";
+  "\n\n\nWe use your camera to detect \nwhere you are looking and to \nprovide help. No images are \nstored. You can disable this \nany time.";
 
 cameraContainer.appendChild(privacyText);
 
