@@ -28,7 +28,7 @@ body {
 }
 .tl {
   top: 15%;
-  left: 15%;
+  left: 30%;
 }
 .tc {
   top: 15%;
@@ -37,11 +37,11 @@ body {
 }
 .tr {
   top: 15%;
-  right: 15%;
+  right: 30%;
 }
 .ml {
   top: 50%;
-  left: 15%;
+  left: 30%;
   transform: translateY(-50%);
 }
 .center {
@@ -51,12 +51,12 @@ body {
 }
 .mr {
   top: 50%;
-  right: 15%;
+  right: 30%;
   transform: translateY(-50%);
 }
 .bl {
   bottom: 15%;
-  left: 15%;
+  left: 30%;
 }
 .bc {
   bottom: 15%;
@@ -65,7 +65,7 @@ body {
 }
 .br {
   bottom: 15%;
-  right: 15%;
+  right: 30%;
 }
 
 /* Checkout */

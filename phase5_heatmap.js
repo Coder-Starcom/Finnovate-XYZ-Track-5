@@ -60,7 +60,12 @@ function renderCharts() {
         ],
       },
       options: {
-        plugins: { title: { display: true, text: "Zone Dwell Times" } },
+        plugins: {
+          title: {
+            display: true,
+            text: "Zone Dwell Times",
+          },
+        },
       },
     }
   );
@@ -79,7 +84,14 @@ function renderCharts() {
           },
         ],
       },
-      options: { plugins: { title: { display: true, text: "Zone Revisits" } } },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Zone Revisits",
+          },
+        },
+      },
     }
   );
 }

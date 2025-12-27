@@ -9,19 +9,27 @@ const dots = Array.from(document.querySelectorAll(".dot"));
 // Start calibration after user consent
 window.addEventListener("consentGiven", () => {
   if (calibrationActive) return;
+
+  // --- ADD THIS SECTION ---
+  webgazer.params.showVideo = false;
+  webgazer.params.showFaceOverlay = false;
+  webgazer.params.showFaceFeedbackBox = false;
+
+  // If WebGazer is already running, force hide the elements
+  webgazer.showVideo(false).showFaceOverlay(false).showFaceFeedbackBox(false);
   calibrationActive = true;
 
   console.log("Phase 1: Calibration started");
 
   calibrationClicks = 0;
-  dots.forEach(dot => dot.classList.remove("done"));
+  dots.forEach((dot) => dot.classList.remove("done"));
 
   // Ensure WebGazer is running (Phase 4 manages camera lifecycle)
   if (!webgazer.isReady()) {
     console.warn("WebGazer not ready yet; calibration will proceed anyway");
   }
 
-  dots.forEach(dot => {
+  dots.forEach((dot) => {
     dot.onclick = () => handleDotClick(dot);
   });
 });
@@ -39,9 +47,7 @@ function handleDotClick(dot) {
 
   webgazer.recordScreenPosition(cx, cy);
 
-  console.log(
-    `Calibration dot recorded: ${calibrationClicks}/${dots.length}`
-  );
+  console.log(`Calibration dot recorded: ${calibrationClicks}/${dots.length}`);
 
   if (calibrationClicks === dots.length) {
     finishCalibration();
